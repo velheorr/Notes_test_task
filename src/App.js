@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import Notes from "./components/Notes";
+import React, {useEffect} from "react";
+import NotePage from "./components/notePage";
+import {useSelector} from "react-redux";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const notePage = useSelector(state => state.notes.notePage);
+
+    return (
+        <div>
+            <div className='header'></div>
+            <div className='wrapper'>
+                { !notePage
+                    ? <Notes/>
+                    :  <NotePage/>
+                }
+            </div>
+
+
+        </div>
+    );
 }
 
 export default App;
