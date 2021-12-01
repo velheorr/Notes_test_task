@@ -68,9 +68,35 @@
     margin-top: 20px;
     margin-left: 20px;
     color: #E6E6E6;
+    position: absolute;
 }
 
 .backArrow:hover {
     color: #8ADD37;
     cursor: pointer;
+}
+
+.oneNote {
+    margin-top: 50px;
+    padding: 0 20px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #70758F;
+
+}
+.dateNote {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 110%;
+    color: #A1A4B5;
+    margin-top: 32px;
+}
+.divider {
+    padding-top: 20px;
+    margin: 0 20px !important;
+    border-color: rgb(0 0 0 / 4%) !important;
 }

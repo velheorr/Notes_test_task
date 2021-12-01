@@ -1,14 +1,12 @@
 import React from 'react';
 import './Notes.css'
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import NoteItem from "./NoteItem";
 import {ColorButton} from "./elements/elements";
 
 
 const Notes = () => {
-    const dispatch = useDispatch();
     const noteList = useSelector(state => state.notes.noteList);
-
 
     const renderNotes = (notes) =>{
         let sorted = [...notes].sort((a, b)=> {

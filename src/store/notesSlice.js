@@ -4,16 +4,13 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
     noteList: [
-        {id: 1, title: 'Длинный заголовок заметки номер 1', comment: 'Комментарий к заметке', date: '2020-12-18'},
-        {id: 2, title: 'Длинный заголовок заметки номер 2', comment: 'Комментарий к заметке', date: '2020-12-25'},
-        {id: 3, title: 'Длинный заголовок заметки номер 3', comment: 'Комментарий к заметке', date: '2020-12-31'},
-        {id: 4, title: 'Длинный заголовок заметки номер 4', comment: 'Комментарий к заметке', date: '2021-01-01'},
-/*        {id: 1, title: 'Длинный заголовок заметки номер 1', comment: 'Комментарий к заметке', date: '18 декабря 2020'},
-        {id: 2, title: 'Длинный заголовок заметки номер 2', comment: 'Комментарий к заметке', date: '25 декабря 2020'},
-        {id: 3, title: 'Длинный заголовок заметки номер 3', comment: 'Комментарий к заметке', date: '31 декабря 2020'},
-        {id: 4, title: 'Длинный заголовок заметки номер 4', comment: 'Комментарий к заметке', date: '01 января 2021'},*/
+        {id: 1, title: 'Длинный заголовок заметки номер 1', comment: 'Комментарий к заметке.', date: '2020-12-18'},
+        {id: 2, title: 'Длинный заголовок заметки номер 2', comment: 'Комментарий к заметке.', date: '2020-12-25'},
+        {id: 3, title: 'Длинный заголовок заметки номер 3', comment: 'Комментарий к заметке.', date: '2020-12-31'},
+        {id: 4, title: 'Длинный заголовок заметки номер 4', comment: 'Комментарий к заметке.', date: '2021-01-01'},
     ],
     notePage: false,
+    openedNote: {}
 
 }
 
@@ -22,7 +19,8 @@ const notesSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-       switchPage: (state, action) => {state.notePage = !state.notePage},
+        switchPage: (state) => {state.notePage = !state.notePage},
+        openNotePage: (state, action) =>  {state.openedNote = state.noteList.filter(i => i.id === action.payload)},
 
     },
 });
@@ -31,5 +29,5 @@ const {actions, reducer} = notesSlice;
 
 export default reducer;
 export const {
-    switchPage
+    switchPage, openNotePage
 } = actions;
