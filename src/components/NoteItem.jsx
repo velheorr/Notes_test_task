@@ -15,7 +15,6 @@ const NoteItem = ({items}) => {
 
     const {title, date, id} = items
 
-
     return (
         <ListItemButton className='notesItem' onClick={()=>openNote(id)}>
             <div className='noteTitle'>{title}</div>

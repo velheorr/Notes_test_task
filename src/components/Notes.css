@@ -1,4 +1,3 @@
-
 .title {
     margin-top: 80px;
     margin-left: 20px;
@@ -9,6 +8,7 @@
     display: flex;
     align-items: center;
     color: #333333;
+    padding-bottom: 52px;
 }
 .button {
     position: absolute;
@@ -17,7 +17,7 @@
 }
 
 .notes {
-    margin: 72px 20px 20px 20px;
+    margin: 20px;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
 
@@ -30,9 +30,7 @@
     display: block !important;
     margin-bottom: 20px !important;
 }
-.notesItem:hover {
-    cursor: pointer;
-}
+.notesItem:hover {cursor: pointer;}
 
 .noteTitle {
     font-style: normal;
@@ -51,9 +49,7 @@
     color: #A1A4B5;
     padding-left: 10px;
 }
-.arrow {
-    display: none;
-}
+.arrow {display: none;}
 .notesItem:hover .arrow {
     display: block;
     color: #8ADD37;

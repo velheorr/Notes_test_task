@@ -14,7 +14,6 @@ const NotePage = () => {
     const {title, date, comment, id} = openedNote[0]
 
 
-
     return (
         <>
             <div className='backArrow'><ArrowBackIcon onClick={()=>dispatch(switchPage())}/></div>

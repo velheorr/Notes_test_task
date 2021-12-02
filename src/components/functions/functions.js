@@ -1,5 +1,7 @@
 
 
+
+// приведение даты к формату YYYY-MM-DD
 export const dateFormat = (date)=>{
     let x = new Date(date);
     let options = {

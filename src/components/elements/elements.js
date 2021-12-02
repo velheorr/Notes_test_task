@@ -1,7 +1,7 @@
 import styled from "@mui/material/styles/styled";
 import Button from "@mui/material/Button";
 
-
+// Зеленая кнопка
 export const ColorButton = styled(Button)(({ theme }) => ({
     color: '#FFFFFF',
     backgroundColor: '#8ADD37',

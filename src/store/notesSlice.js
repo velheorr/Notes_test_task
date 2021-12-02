@@ -1,7 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-
-
 const initialState = {
     noteList: [
         {id: 1, title: 'Длинный заголовок заметки номер 1', comment: 'Комментарий к заметке.', date: '2020-12-18'},
@@ -11,7 +9,6 @@ const initialState = {
     ],
     notePage: false,
     openedNote: {},
-
 }
 
 
@@ -23,8 +20,11 @@ const notesSlice = createSlice({
         openNotePage: (state, action) =>  {state.openedNote = state.noteList.filter(i => i.id === action.payload)},
         addNote: (state, action) => {state.noteList = [...state.noteList, action.payload]},
         editNote: (state, action) => {
-            state.noteList = [state.noteList.filter(i => i.id !== action.payload.id), action.payload]
+            state.noteList = [...state.noteList.filter(i => i.id !== action.payload.id), action.payload]
         },
+       /* editNote: (state, action) => {
+            state.noteList = [state.noteList.filter(i => i.id !== action.payload.id), action.payload]
+        },*/
 
     },
 });

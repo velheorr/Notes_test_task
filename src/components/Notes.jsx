@@ -8,6 +8,7 @@ import {Modal} from "./elements/Modal";
 const Notes = () => {
     const noteList = useSelector(state => state.notes.noteList);
 
+    // Вывод заметок + сортировка по дате
     const renderNotes = (notes) =>{
         let sorted = [...notes].sort((a, b)=> {
             return a.date < b.date ? 1 : a.date > b.date ? -1 : 0
@@ -19,10 +20,8 @@ const Notes = () => {
 
     return (
         <>
-            <div>
-                <span className='title'>Заметки</span>
-                <div className='button'><Modal  btn={'+ Добавить заметку'}/></div>
-            </div>
+            <span className='title'>Заметки</span>
+            <div className='button'><Modal  btn={'+ Добавить заметку'}/></div>
             <div className='notes'>
                 {elements}
             </div>

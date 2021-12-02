@@ -2,14 +2,11 @@
     text-align: center;
     font-style: normal;
     font-weight: 500;
-    fontSize: 24px;
+    font-size: 24px;
     color: #1F242A;
 
-
 }
-.closeBtn {
-    text-align: right;
-}
+.closeBtn {text-align: right;}
 
 .modalActions {
     color: #CCCCCC;
@@ -42,28 +39,18 @@ input.text, textarea.comment {
     color: #20262d;
     margin-top: 10px;
 }
-input.comment {
-    height: 85px;
-}
-
+input.comment {height: 85px;}
 input.text:hover, textarea.comment:hover {
      background: #eaeef3;
      border-color: #e5e8ec;
 }
 
-input.text:focus, textarea.comment:focus {
-     outline: none;
-}
-
-.error {
-    color: red;
-}
+input.text:focus, textarea.comment:focus {outline: none;}
+.error {color: red;}
 
 .addBtn {
     padding-top: 40px;
     text-align: center;
     padding-bottom: 10px;
 }
-.addBtn button {
-    width: 177px;
-}
+.addBtn button {width: 177px;}

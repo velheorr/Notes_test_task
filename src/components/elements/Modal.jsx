@@ -54,14 +54,17 @@ export const Modal =({...props})=> {
     const noteList = useSelector(state => state.notes.noteList);
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
-    const [edited, setEdited] = useState(false);
+    /*const [edited, setEdited] = useState(false);*/
 
     const handleOpen = () => setOpen(true);
+
+    // Очистка формы при закрытии модального окна
     const handleClose = () => {
         setOpen(false)
         resetForm()
     };
 
+    // react hook form инициализация
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm({
         defaultValues: {
             title: "",
@@ -69,33 +72,34 @@ export const Modal =({...props})=> {
         }
     });
 
+    let submitBtn = 'Добавить';
+    // Если открыто редактирование заметки - получение ее из стора и установка значений формы
     if(props.edit){
         let editedNote = noteList.filter(i => i.id === props.edit)
         setValue('title', editedNote[0].title)
         setValue('comment', editedNote[0].comment)
+        submitBtn = 'Изменить'
     }
 
+    // Очистка формы
     const resetForm = ()=>{
         reset({title:'', comment:''})
     }
+
+    // Добавление заметки или ее изминение
     const onSubmit = data =>{
         data.date = new Date().getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
-        if (edited) {
-
+        if (props.edit) {
+            data.id = props.edit
             dispatch(editNote(data))
+            dispatch(switchPage())
         } else {
-
             data.id = Date.now()
             dispatch(addNote(data))
-
         }
-        setEdited(false)
         resetForm()
-        dispatch(switchPage())
         handleClose()
     };
-
-
 
 
     return (
@@ -131,7 +135,7 @@ export const Modal =({...props})=> {
                               {...register("comment", { required: true })}
                         />
                         {errors.comment && <span className='error'>Поле не может быть пустым</span>}
-                        <div className='addBtn'><ColorButton type="submit" variant="contained">Добавить</ColorButton></div>
+                        <div className='addBtn'><ColorButton type="submit" variant="contained">{submitBtn}</ColorButton></div>
                     </form>
                 </Box>
             </StyledModal>
