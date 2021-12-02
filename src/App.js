@@ -4,6 +4,7 @@ import React, {useEffect} from "react";
 import NotePage from "./components/notePage";
 import {useSelector} from "react-redux";
 
+
 function App() {
     const notePage = useSelector(state => state.notes.notePage);
 
@@ -15,6 +16,7 @@ function App() {
                     ? <Notes/>
                     :  <NotePage/>
                 }
+
             </div>
 
 

@@ -10,7 +10,7 @@ const initialState = {
         {id: 4, title: 'Длинный заголовок заметки номер 4', comment: 'Комментарий к заметке.', date: '2021-01-01'},
     ],
     notePage: false,
-    openedNote: {}
+    openedNote: {},
 
 }
 
@@ -21,6 +21,7 @@ const notesSlice = createSlice({
     reducers: {
         switchPage: (state) => {state.notePage = !state.notePage},
         openNotePage: (state, action) =>  {state.openedNote = state.noteList.filter(i => i.id === action.payload)},
+        addNote: (state, action) => {state.noteList = state.noteList.push(action.payload)},
 
     },
 });
@@ -29,5 +30,5 @@ const {actions, reducer} = notesSlice;
 
 export default reducer;
 export const {
-    switchPage, openNotePage
+    switchPage, openNotePage, addNote
 } = actions;

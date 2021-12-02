@@ -1,12 +1,14 @@
 import React from 'react';
 import './Notes.css'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import NoteItem from "./NoteItem";
-import {ColorButton} from "./elements/elements";
+import {Modal} from "./elements/Modal";
+
 
 
 const Notes = () => {
     const noteList = useSelector(state => state.notes.noteList);
+    const dispatch = useDispatch()
 
     const renderNotes = (notes) =>{
         let sorted = [...notes].sort((a, b)=> {
@@ -17,16 +19,11 @@ const Notes = () => {
     const elements = renderNotes(noteList);
 
 
-    let today = new Date().getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
-    console.log(today)
-
-
-
     return (
         <>
             <div>
                 <span className='title'>Заметки</span>
-                <div className='button'><ColorButton  variant="contained">+ Добавить заметку</ColorButton></div>
+                <div className='button'><Modal/></div>
             </div>
             <div className='notes'>
                 {elements}

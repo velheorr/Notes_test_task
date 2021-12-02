@@ -1,0 +1,71 @@
+.modalTitle {
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    fontSize: 24px;
+    color: #1F242A;
+
+
+}
+.closeBtn {
+    text-align: right;
+}
+
+.modalActions {
+    color: #CCCCCC;
+    margin-top: 20px;
+    position: relative;
+}
+.modalActions button:last-child {
+    right: 0;
+    position: absolute;
+}
+
+.modalTitle2 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    color: #999999;
+    padding-top: 30px;
+}
+
+input.text, textarea.comment {
+    width: 384px;
+    font-size: 1rem;
+    font-family: IBM Plex Sans, sans-serif;
+    font-weight: 400;
+    line-height: 1.4375em;
+    background: rgb(243, 246, 249);
+    border: 1px solid #e5e8ec;
+    border-radius: 10px;
+    padding: 6px 10px;
+    color: #20262d;
+    margin-top: 10px;
+}
+input.comment {
+    height: 85px;
+}
+
+input.text:hover, textarea.comment:hover {
+     background: #eaeef3;
+     border-color: #e5e8ec;
+}
+
+input.text:focus, textarea.comment:focus {
+     outline: none;
+}
+
+.error {
+    color: red;
+}
+
+.addBtn {
+    padding-top: 40px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.addBtn button {
+    width: 177px;
+}

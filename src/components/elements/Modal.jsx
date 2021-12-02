@@ -1,0 +1,115 @@
+import React, {useState} from 'react';
+import './Modal.css'
+import { styled, Box } from '@mui/system';
+import ModalUnstyled from '@mui/base/ModalUnstyled';
+import {ColorButton} from "./elements";
+import IconButton from "@mui/material/IconButton";
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import ReplayIcon from '@mui/icons-material/Replay';
+import Divider from "@mui/material/Divider";
+import CloseIcon from '@mui/icons-material/Close';
+import { useForm } from "react-hook-form";
+import {useDispatch} from "react-redux";
+import {addNote} from "../../store/notesSlice";
+
+const StyledModal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: -285px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+`;
+
+const Backdrop = styled('div')`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: #454A63;
+  opacity: 0.8;
+`;
+
+const style = {
+    width: 410,
+    bgcolor: '#FFFFFF',
+    boxShadow: '0px 20px 40px rgba(0, 0, 0, 0.16)',
+    p: 2,
+    px: 4,
+    pb: 3,
+};
+
+
+export const Modal =()=> {
+    const dispatch = useDispatch()
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        defaultValues: {
+            title: "",
+            comment: "",
+        }
+    });
+    const resetForm = ()=>{
+        reset({title:'', comment:''})
+    }
+    const onSubmit = data =>{
+        data.date = new Date().getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
+        console.log(today)
+        console.log(data)
+        //dispatch(addNote(data))
+    };
+
+
+    return (
+        <div>
+            <ColorButton onClick={handleOpen} variant="contained">+ Добавить заметку</ColorButton>
+            <StyledModal
+                aria-labelledby="unstyled-modal-title"
+                aria-describedby="unstyled-modal-description"
+                open={open}
+                onClose={handleClose}
+                BackdropComponent={Backdrop}
+            >
+                <Box sx={style}>
+                    <div className='closeBtn'><IconButton onClick={handleClose}><CloseIcon /></IconButton></div>
+                    <div className='modalTitle' >Добавить заметку</div>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className='modalActions'>
+                            <IconButton aria-label="bold"><FormatBoldIcon /></IconButton>
+                            <IconButton aria-label="italic"><FormatItalicIcon /></IconButton>
+                            <IconButton aria-label="underline"><FormatUnderlinedIcon /></IconButton>
+                            <IconButton aria-label="number"><FormatListNumberedIcon /></IconButton>
+                            <IconButton aria-label="list"><FormatListBulletedIcon /></IconButton>
+                            <IconButton onClick={resetForm} aria-label="replay"><ReplayIcon /></IconButton>
+                        </div>
+                        <Divider/>
+                        <div className='modalTitle2'>Название заметки</div>
+                        <input className='text' type="text"  placeholder="Введите заголовок заметки"
+                               {...register("title", { required: true })}
+                         />
+                        {errors.title && <span className='error'>Поле не может быть пустым</span>}
+                        <div className='modalTitle2'>Комментарий</div>
+                        <textarea className='comment' type="text"  placeholder="Введите комментарий"
+                              {...register("comment", { required: true })}
+                        />
+                        {errors.comment && <span className='error'>Поле не может быть пустым</span>}
+                        <div className='addBtn'><ColorButton type="submit" variant="contained">Добавить</ColorButton></div>
+                    </form>
+                </Box>
+            </StyledModal>
+        </div>
+    );
+}
