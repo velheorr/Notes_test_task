@@ -11,10 +11,12 @@ const Notes = () => {
     const dispatch = useDispatch()
 
     const renderNotes = (notes) =>{
+        console.log(notes)
         let sorted = [...notes].sort((a, b)=> {
             return a.date < b.date ? 1 : a.date > b.date ? -1 : 0
         })
         return sorted.map((item, i)=> <NoteItem key={i} items={item} />)
+        //return notes.map((item, i)=> <NoteItem key={i} items={item} />)
     }
     const elements = renderNotes(noteList);
 
@@ -27,6 +29,8 @@ const Notes = () => {
             </div>
             <div className='notes'>
                 {elements}
+            </div>
+            <div className='notes'>
                 {elements}
             </div>
         </>

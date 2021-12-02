@@ -67,9 +67,10 @@ export const Modal =()=> {
     }
     const onSubmit = data =>{
         data.date = new Date().getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
-        console.log(today)
-        console.log(data)
-        //dispatch(addNote(data))
+        data.id = Date.now()
+        dispatch(addNote(data))
+        resetForm()
+        handleClose()
     };
 
 
