@@ -13,8 +13,8 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import Divider from "@mui/material/Divider";
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from "react-hook-form";
-import {useDispatch} from "react-redux";
-import {addNote} from "../../store/notesSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {addNote, editNote, switchPage} from "../../store/notesSlice";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -50,33 +50,57 @@ const style = {
 };
 
 
-export const Modal =()=> {
+export const Modal =({...props})=> {
+    const noteList = useSelector(state => state.notes.noteList);
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [edited, setEdited] = useState(false);
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => {
+        setOpen(false)
+        resetForm()
+    };
+
+    const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm({
         defaultValues: {
             title: "",
             comment: "",
         }
     });
+
+    if(props.edit){
+        let editedNote = noteList.filter(i => i.id === props.edit)
+        setValue('title', editedNote[0].title)
+        setValue('comment', editedNote[0].comment)
+    }
+
     const resetForm = ()=>{
         reset({title:'', comment:''})
     }
     const onSubmit = data =>{
         data.date = new Date().getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
-        data.id = Date.now()
-        dispatch(addNote(data))
+        if (edited) {
+
+            dispatch(editNote(data))
+        } else {
+
+            data.id = Date.now()
+            dispatch(addNote(data))
+
+        }
+        setEdited(false)
         resetForm()
+        dispatch(switchPage())
         handleClose()
     };
 
 
+
+
     return (
         <div>
-            <ColorButton onClick={handleOpen} variant="contained">+ Добавить заметку</ColorButton>
+            <ColorButton onClick={handleOpen} variant="contained" startIcon={props.startIcon}>{props.btn}</ColorButton>
             <StyledModal
                 aria-labelledby="unstyled-modal-title"
                 aria-describedby="unstyled-modal-description"

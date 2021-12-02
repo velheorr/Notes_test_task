@@ -2,7 +2,6 @@
 .title {
     margin-top: 80px;
     margin-left: 20px;
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 40px;
@@ -36,7 +35,6 @@
 }
 
 .noteTitle {
-    font-family: Roboto;
     font-style: normal;
     font-weight: 500;
     display: flex;
@@ -46,7 +44,6 @@
 }
 
 .noteDate{
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 13px;
@@ -80,7 +77,6 @@
 .oneNote {
     margin-top: 50px;
     padding: 0 20px;
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
@@ -88,7 +84,6 @@
 
 }
 .dateNote {
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 13px;

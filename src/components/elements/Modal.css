@@ -1,6 +1,5 @@
 .modalTitle {
     text-align: center;
-    font-family: Roboto;
     font-style: normal;
     font-weight: 500;
     fontSize: 24px;
@@ -23,7 +22,6 @@
 }
 
 .modalTitle2 {
-    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 15px;

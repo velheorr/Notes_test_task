@@ -22,6 +22,9 @@ const notesSlice = createSlice({
         switchPage: (state) => {state.notePage = !state.notePage},
         openNotePage: (state, action) =>  {state.openedNote = state.noteList.filter(i => i.id === action.payload)},
         addNote: (state, action) => {state.noteList = [...state.noteList, action.payload]},
+        editNote: (state, action) => {
+            state.noteList = [state.noteList.filter(i => i.id !== action.payload.id), action.payload]
+        },
 
     },
 });
@@ -30,5 +33,5 @@ const {actions, reducer} = notesSlice;
 
 export default reducer;
 export const {
-    switchPage, openNotePage, addNote
+    switchPage, openNotePage, addNote, editNote
 } = actions;

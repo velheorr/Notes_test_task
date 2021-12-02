@@ -1,6 +1,6 @@
 import './App.css';
 import Notes from "./components/Notes";
-import React, {useEffect} from "react";
+import React from "react";
 import NotePage from "./components/notePage";
 import {useSelector} from "react-redux";
 
