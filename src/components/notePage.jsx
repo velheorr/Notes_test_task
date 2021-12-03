@@ -11,7 +11,13 @@ import EditIcon from '@mui/icons-material/Edit';
 const NotePage = () => {
     const dispatch = useDispatch();
     const openedNote = useSelector(state => state.notes.openedNote);
-    const {title, date, comment, id} = openedNote[0]
+    const {title, date, comment, id, style} = openedNote[0]
+
+    console.log(style)
+    let commentStyle = style || ''
+    if (style === 'bold'){commentStyle = 'bold'}
+    if (style === 'underline'){commentStyle = 'underline'}
+    if (style === 'italic'){commentStyle = 'italic'}
 
     return (
         <>
@@ -20,7 +26,7 @@ const NotePage = () => {
             <div className='button'><Modal btn={'Править заметку'} startIcon={<EditIcon/>} edit={id} /></div>
             <div className='oneNote'>
                 <div>Комментарий пользователя к заметке.</div>
-                <div>{comment}</div>
+                <div className={commentStyle}>{comment}</div>
                 <div className='dateNote'>{dateFormat(date)}</div>
             </div>
             <Divider className='divider'/>

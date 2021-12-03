@@ -92,3 +92,9 @@
     margin: 0 20px !important;
     border-color: rgb(0 0 0 / 4%) !important;
 }
+
+.list {}
+.number {}
+.underline {text-decoration: underline;}
+.italic {font-style: italic}
+.bold {font-weight: 600;}

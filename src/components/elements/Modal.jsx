@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './Modal.css'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
@@ -54,6 +54,7 @@ export const Modal =({...props})=> {
     const noteList = useSelector(state => state.notes.noteList);
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
+    const [format, setFormat] = useState('')
     const handleOpen = () => setOpen(true);
 
     // Очистка формы при закрытии модального окна
@@ -72,20 +73,30 @@ export const Modal =({...props})=> {
 
     let submitBtn = ['Добавить', 'Добавить заметку'];
     // Если открыто редактирование заметки - получение ее из стора и установка значений формы
+
+    let editedNote
     if(props.edit){
-        let editedNote = noteList.filter(i => i.id === props.edit)
-        setValue('title', editedNote[0].title)
-        setValue('comment', editedNote[0].comment)
-        submitBtn = ['Изменить', 'Править заметку']
+        editedNote = noteList.filter(i => i.id === props.edit);
+        setValue('title', editedNote[0].title);
+        setValue('comment', editedNote[0].comment);
+        submitBtn = ['Изменить', 'Править заметку'];
     }
+    useEffect(()=>{
+        if(props.edit){
+            setFormat(editedNote[0].style)
+        }
+        // eslint-disable-next-line
+    }, [])
+
 
     // Очистка формы
     const resetForm = ()=>{
-        reset({title:'', comment:''})
+        reset({title:'', comment:''});
     }
 
     // Добавление заметки или ее изминение
     const onSubmit = data =>{
+        data.style = format
         data.date = new Date().getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
         if (props.edit) {
             data.id = props.edit
@@ -96,14 +107,17 @@ export const Modal =({...props})=> {
             dispatch(addNote(data))
         }
         resetForm()
+        setFormat('')
         handleClose()
     };
 
     // выбор активного класса
     const itemRefs = useRef([]);
-    const modalActions = (id)=> {
+    const modalActions = (id, style)=> {
         itemRefs.current.forEach(item => item.classList.remove('activeAction'));
         itemRefs.current[id].classList.add('activeAction');
+        setFormat(style)
+
     }
 
     return (
@@ -122,11 +136,11 @@ export const Modal =({...props})=> {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className='modalActions'>
                             <span>
-                                <IconButton ref={el => itemRefs.current[0] = el} onClick={()=> modalActions(0)} aria-label="bold"><FormatBoldIcon /></IconButton>
-                                <IconButton ref={el => itemRefs.current[1] = el} onClick={()=> modalActions(1)} aria-label="italic"><FormatItalicIcon /></IconButton>
-                                <IconButton ref={el => itemRefs.current[2] = el} onClick={()=> modalActions(2)} aria-label="underline"><FormatUnderlinedIcon /></IconButton>
-                                <IconButton ref={el => itemRefs.current[3] = el} onClick={()=> modalActions(3)} aria-label="number"><FormatListNumberedIcon /></IconButton>
-                                <IconButton ref={el => itemRefs.current[4] = el} onClick={()=> modalActions(4)} aria-label="list"><FormatListBulletedIcon /></IconButton>
+                                <IconButton id='bold' ref={el => itemRefs.current[0] = el} onClick={()=> modalActions(0, "bold")}><FormatBoldIcon /></IconButton>
+                                <IconButton id='italic' ref={el => itemRefs.current[1] = el} onClick={()=> modalActions(1, "italic")}><FormatItalicIcon /></IconButton>
+                                <IconButton id='underline' ref={el => itemRefs.current[2] = el} onClick={()=> modalActions(2, "underline")}><FormatUnderlinedIcon /></IconButton>
+                                <IconButton id='number' ref={el => itemRefs.current[3] = el} onClick={()=> modalActions(3, "number")}><FormatListNumberedIcon /></IconButton>
+                                <IconButton id='list' ref={el => itemRefs.current[4] = el} onClick={()=> modalActions(4, "list")}><FormatListBulletedIcon /></IconButton>
                             </span>
                             <IconButton onClick={resetForm} aria-label="replay"><ReplayIcon /></IconButton>
                         </div>
