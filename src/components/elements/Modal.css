@@ -13,13 +13,11 @@
     margin-top: 20px;
     position: relative;
 }
-.activeAction {
-    color: #8ADD37 !important;
-}
 .modalActions>button {
     right: 0;
     position: absolute;
 }
+.activeAction {color: #8ADD37 !important;}
 
 .modalTitle2 {
     font-style: normal;
