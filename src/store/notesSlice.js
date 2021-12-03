@@ -22,10 +22,6 @@ const notesSlice = createSlice({
         editNote: (state, action) => {
             state.noteList = [...state.noteList.filter(i => i.id !== action.payload.id), action.payload]
         },
-       /* editNote: (state, action) => {
-            state.noteList = [state.noteList.filter(i => i.id !== action.payload.id), action.payload]
-        },*/
-
     },
 });
 

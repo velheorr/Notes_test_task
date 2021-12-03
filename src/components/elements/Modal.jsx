@@ -72,13 +72,13 @@ export const Modal =({...props})=> {
         }
     });
 
-    let submitBtn = 'Добавить';
+    let submitBtn = ['Добавить', 'Добавить заметку'];
     // Если открыто редактирование заметки - получение ее из стора и установка значений формы
     if(props.edit){
         let editedNote = noteList.filter(i => i.id === props.edit)
         setValue('title', editedNote[0].title)
         setValue('comment', editedNote[0].comment)
-        submitBtn = 'Изменить'
+        submitBtn = ['Изменить', 'Править заметку']
     }
 
     // Очистка формы
@@ -114,7 +114,7 @@ export const Modal =({...props})=> {
             >
                 <Box sx={style}>
                     <div className='closeBtn'><IconButton onClick={handleClose}><CloseIcon /></IconButton></div>
-                    <div className='modalTitle' >Добавить заметку</div>
+                    <div className='modalTitle' >{submitBtn[1]}</div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className='modalActions'>
                             <IconButton aria-label="bold"><FormatBoldIcon /></IconButton>
@@ -135,7 +135,7 @@ export const Modal =({...props})=> {
                               {...register("comment", { required: true })}
                         />
                         {errors.comment && <span className='error'>Поле не может быть пустым</span>}
-                        <div className='addBtn'><ColorButton type="submit" variant="contained">{submitBtn}</ColorButton></div>
+                        <div className='addBtn'><ColorButton type="submit" variant="contained">{submitBtn[0]}</ColorButton></div>
                     </form>
                 </Box>
             </StyledModal>
