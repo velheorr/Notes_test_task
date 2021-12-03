@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import './Modal.css'
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
@@ -101,6 +101,12 @@ export const Modal =({...props})=> {
         handleClose()
     };
 
+    // выбор активного класса
+    const itemRefs = useRef([]);
+    const modalActions = (id)=> {
+        itemRefs.current.forEach(item => item.classList.remove('activeAction'));
+        itemRefs.current[id].classList.add('activeAction');
+    }
 
     return (
         <div>
@@ -117,11 +123,13 @@ export const Modal =({...props})=> {
                     <div className='modalTitle' >{submitBtn[1]}</div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className='modalActions'>
-                            <IconButton aria-label="bold"><FormatBoldIcon /></IconButton>
-                            <IconButton aria-label="italic"><FormatItalicIcon /></IconButton>
-                            <IconButton aria-label="underline"><FormatUnderlinedIcon /></IconButton>
-                            <IconButton aria-label="number"><FormatListNumberedIcon /></IconButton>
-                            <IconButton aria-label="list"><FormatListBulletedIcon /></IconButton>
+                            <span>
+                                <IconButton ref={el => itemRefs.current[0] = el} onClick={()=> modalActions(0)} aria-label="bold"><FormatBoldIcon /></IconButton>
+                                <IconButton ref={el => itemRefs.current[1] = el} onClick={()=> modalActions(1)}  aria-label="italic"><FormatItalicIcon /></IconButton>
+                                <IconButton ref={el => itemRefs.current[2] = el} onClick={()=> modalActions(2)}  aria-label="underline"><FormatUnderlinedIcon /></IconButton>
+                                <IconButton ref={el => itemRefs.current[3] = el} onClick={()=> modalActions(3)}  aria-label="number"><FormatListNumberedIcon /></IconButton>
+                                <IconButton ref={el => itemRefs.current[4] = el} onClick={()=> modalActions(4)}  aria-label="list"><FormatListBulletedIcon /></IconButton>
+                            </span>
                             <IconButton onClick={resetForm} aria-label="replay"><ReplayIcon /></IconButton>
                         </div>
                         <Divider/>
