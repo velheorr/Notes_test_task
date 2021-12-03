@@ -54,8 +54,6 @@ export const Modal =({...props})=> {
     const noteList = useSelector(state => state.notes.noteList);
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
-    /*const [edited, setEdited] = useState(false);*/
-
     const handleOpen = () => setOpen(true);
 
     // Очистка формы при закрытии модального окна
@@ -125,10 +123,10 @@ export const Modal =({...props})=> {
                         <div className='modalActions'>
                             <span>
                                 <IconButton ref={el => itemRefs.current[0] = el} onClick={()=> modalActions(0)} aria-label="bold"><FormatBoldIcon /></IconButton>
-                                <IconButton ref={el => itemRefs.current[1] = el} onClick={()=> modalActions(1)}  aria-label="italic"><FormatItalicIcon /></IconButton>
-                                <IconButton ref={el => itemRefs.current[2] = el} onClick={()=> modalActions(2)}  aria-label="underline"><FormatUnderlinedIcon /></IconButton>
-                                <IconButton ref={el => itemRefs.current[3] = el} onClick={()=> modalActions(3)}  aria-label="number"><FormatListNumberedIcon /></IconButton>
-                                <IconButton ref={el => itemRefs.current[4] = el} onClick={()=> modalActions(4)}  aria-label="list"><FormatListBulletedIcon /></IconButton>
+                                <IconButton ref={el => itemRefs.current[1] = el} onClick={()=> modalActions(1)} aria-label="italic"><FormatItalicIcon /></IconButton>
+                                <IconButton ref={el => itemRefs.current[2] = el} onClick={()=> modalActions(2)} aria-label="underline"><FormatUnderlinedIcon /></IconButton>
+                                <IconButton ref={el => itemRefs.current[3] = el} onClick={()=> modalActions(3)} aria-label="number"><FormatListNumberedIcon /></IconButton>
+                                <IconButton ref={el => itemRefs.current[4] = el} onClick={()=> modalActions(4)} aria-label="list"><FormatListBulletedIcon /></IconButton>
                             </span>
                             <IconButton onClick={resetForm} aria-label="replay"><ReplayIcon /></IconButton>
                         </div>
